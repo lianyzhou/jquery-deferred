@@ -1,0 +1,19 @@
+<script src="jquery.js"></script>
+<script>
+function a1(def){
+    alert('Ok');
+}
+function a2(def){
+    alert('No1');
+    return this;
+}
+var def = $.Deferred();
+
+// 这里函数 a2()返回 this。这样 def.reject()时，触发 newDefer.reject(), 实现 newDefer 等阶订阅 def。
+// done(newDefer.reject)是动态添加的回调函数, 因此总是在最后执行。返回值 No1 No2 newNo1
+// 如果将函数 a2()中的 return this 注释掉，返回值 No1 newNo1 No2，这是因为调用 a2()后会立刻触发 newDefer.reject
+// 但是这里的应用并不常见，实现等阶订阅效果也不需要这么复杂逻辑。。。
+def.then(a1, a2).fail(function () {alert('newNo1')});
+def.fail(function (){alert('No2')});
+def.reject();
+</script>

@@ -1,0 +1,19 @@
+{
+  "name": "jquery-deferred",
+  "version": "0.0.1",
+  "description": "jquery deferred examples",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jquery",
+    "deferred",
+    "promise"
+  ],
+  "author": "lianyzhou",
+  "license": "BSD-2-Clause",
+  "dependencies":{
+     "express" : "3.2.6"
+  }
+}

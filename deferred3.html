@@ -1,0 +1,19 @@
+<p></p>
+<script src="jquery.js"></script>
+<script>
+var filterResolve = function() {
+  var defer = $.Deferred(),
+      filtered = defer.then(function(value) {
+        return value * 2;        //这个返回值可以被利用
+      });
+ 
+  defer.resolve(5);
+  
+  filtered.done(function(value) {
+    $("p").html("Value is ( 2*5 = ) 10: " + value);
+  });
+  
+};
+
+filterResolve();
+</script>

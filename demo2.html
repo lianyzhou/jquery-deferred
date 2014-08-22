@@ -1,0 +1,57 @@
+<div id="content"></div>
+<script src="jquery.js"></script>
+<script src="jquery.tmpl.js"></script>
+<script>
+function getUserInfo() {
+	return $.ajax({
+		url : "/userinfo",
+		dataType : "json"
+	});
+}
+function getWeather() {
+	return $.ajax({
+		url :'/weather',
+		dataType : "json" 
+	});
+}
+function getNewsList() {
+	return $.ajax({
+		url : "/news",
+		dataType : "json"
+	});
+}
+function buildTemplate(userInfo,weather,newsList) {
+	$.tmpl('<p>用户：${user.username}，城市：${weather.city}，天气：${weather.temparature}，${weather.airquality}</p>' , {
+		user : userInfo,
+		weather : weather
+	}).appendTo($('#content'));
+	$.tmpl('<li><a href="${href}">${text}</a></li>' , newsList).appendTo('<ul></ul>').appendTo($('#content'));
+}
+function getPageContent() {
+	var userInfo , 
+		weather,
+		newsList;
+	//获取用户信息
+	getUserInfo()
+		.then(function(data) {
+			userInfo = data;
+		//获取天气状况
+			return getWeather();
+		}).then(function(data) {
+			weather = data;
+			return getNewsList();
+		//获取新闻列表
+		}).then(function(data) {
+			newsList = data;
+		//组织页面html
+			buildTemplate(userInfo , weather , newsList);
+		},function(xhr,reason,errText) {
+		//统一错误处理
+			alert(xhr.responseText);
+		});
+}
+
+$(function() {
+	getPageContent();
+});
+</script>

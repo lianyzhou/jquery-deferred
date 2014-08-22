@@ -1,0 +1,18 @@
+<script src="jquery.js"></script>
+<script>
+function fn1() { alert('done1')}
+function fn2() { alert('done2')}
+function fn3() { alert('all done')}
+var deferred1 = $.Deferred();
+var deferred2 = $.Deferred();
+ 
+deferred1.done(fn1).fail(fn1);
+deferred2.done(fn2);
+
+$.when(deferred1, deferred2).done(fn3).fail(fn3);
+
+// deferred1.reject();      //返回 done1 、 all done 
+
+deferred1.resolve();       
+deferred2.resolve();       // 返回 done1、 done2、 all done
+</script>

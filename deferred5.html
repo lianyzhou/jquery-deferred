@@ -1,0 +1,19 @@
+<script src="jquery.js"></script>
+<script>
+var obj = {
+	echo : function(name) {
+		alert('hello : ' + name);
+	}
+};
+
+var Deferred = $.Deferred();
+
+Deferred.promise(obj);
+
+Deferred.resolve('world');
+
+obj.done(function(name) {
+	obj.echo (name);
+}).echo('test');
+
+</script>

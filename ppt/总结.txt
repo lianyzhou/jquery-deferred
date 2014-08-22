@@ -1,0 +1,11 @@
+$.Callbacks
+once
+  只要运行过fire之后，就相当于这个Callback被屏蔽了。
+memory
+memory的特点是，会记住最后一次fire过的值。
+后来再添加上的函数，会自动执行一次最后一次fire的值。
+unique
+unique的特点是对于相同的函数，永远只能添加成功一次。
+stopOnFalse
+stopOnFalse的特点是针对添加进来的所有函数来看的
+每fire一次，从第一个函数开始，如果返回了false，则后面的函数不再执行了。
